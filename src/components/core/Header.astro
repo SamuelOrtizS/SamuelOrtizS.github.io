@@ -1,40 +1,52 @@
 ---
-import Button from '../ui/Button.astro';
-import LanguageToggle from './LanguageToggle.astro';
+import Button from "../ui/Button.astro";
+import LanguageToggle from "./LanguageToggle.astro";
 
 const navItems = [
-  { labelKey: 'nav.home', defaultLabel: 'Inicio', href: '/' },
-  { labelKey: 'nav.blog', defaultLabel: 'Blog', href: '/blog' },
-  { labelKey: 'nav.about', defaultLabel: 'Sobre mí', href: '/about' },
-  { labelKey: 'nav.contact', defaultLabel: 'Contacto', href: '/contact' },
+  { labelKey: "nav.home", defaultLabel: "Inicio", href: "/" },
+  { labelKey: "nav.blog", defaultLabel: "Blog", href: "/blog" },
+  { labelKey: "nav.about", defaultLabel: "Sobre mí", href: "/about" },
+  { labelKey: "nav.contact", defaultLabel: "Contacto", href: "/contact" },
 ];
 
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="sticky top-0 z-40 w-full border-b border-base-800 bg-base-950/90 backdrop-blur-md">
+<header
+  class="sticky top-0 z-40 w-full border-b border-base-800 bg-base-950/90 backdrop-blur-md"
+>
   <div class="site-container flex h-16 items-center justify-between gap-4">
     <!-- Brand / Logo -->
-    <a href="/" class="group flex items-center gap-2 text-sm font-semibold tracking-wider text-base-100 no-underline">
+    <a
+      href="/"
+      class="group flex items-center gap-2 text-sm font-semibold tracking-wider text-base-100 no-underline"
+    >
       <span class="text-primary-500">❯</span>
-      <span class="group-hover:text-primary-400 transition-colors">samuelortiz<span class="text-primary-500">.dev</span></span>
+      <span class="group-hover:text-primary-400 transition-colors"
+        >samuelortiz<span class="text-primary-500">.github.io</span></span
+      >
     </a>
 
     <!-- Desktop Nav Links -->
-    <nav class="hidden md:flex items-center gap-6 text-sm" aria-label="Main Navigation">
+    <nav
+      class="hidden md:flex items-center gap-6 text-sm"
+      aria-label="Main Navigation"
+    >
       {
         navItems.map((item) => {
-          const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
+          const isActive =
+            currentPath === item.href ||
+            (item.href !== "/" && currentPath.startsWith(item.href));
           return (
             <a
               href={item.href}
               data-i18n={item.labelKey}
               class={`relative py-1 no-underline transition-colors ${
                 isActive
-                  ? 'text-primary-400 font-medium'
-                  : 'text-base-300 hover:text-base-100 underline-ltr'
+                  ? "text-primary-400 font-medium"
+                  : "text-base-300 hover:text-base-100 underline-ltr"
               }`}
-              aria-current={isActive ? 'page' : undefined}
+              aria-current={isActive ? "page" : undefined}
             >
               {item.defaultLabel}
             </a>
