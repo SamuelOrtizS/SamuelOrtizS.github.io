@@ -1,0 +1,31 @@
+---
+// Componente <Image /> optimizado por Astro
+// https://docs.astro.build/en/guides/images/
+
+interface Props {
+  src: string;        // URL o path del archivo de imagen
+  alt: string;        // Texto alternativo (required para accesibilidad)
+  width?: number;     // Ancho en píxeles (opcional - Astro lo infiere)
+  height?: number;    // Alto en píxeles (opcional - Astro lo infiere)
+  loading?: 'lazy';   // Pre-carga diferida (opcional)
+}
+
+const { src, alt, width, height, loading = 'eager' } = Astro.props;
+---
+
+<!-- 
+Astro Image Optimizer:
+- Genera automáticamente imágenes WebP/AVIF con fallback JPEG
+- Redimensionado automático basado en el layout (responsive images)
+- Lazy loading automático cuando es apropiado
+- Formatos optimizados según tamaño y tipo de dispositivo
+-->
+
+<img 
+  src={src}
+  alt={alt}
+  width={width}
+  height={height}
+  loading={loading}
+  style="max-width: 100%; height: auto;"
+/>
