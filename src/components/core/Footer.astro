@@ -1,0 +1,44 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="w-full border-t border-base-800 bg-base-950 py-10 text-xs text-base-400">
+  <div class="site-container flex flex-col md:flex-row items-center justify-between gap-6">
+    <div class="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-2 h-2 rounded-full bg-primary-500 animate-pulse"></span>
+        <span class="text-base-300 font-mono" data-i18n="hero.badge">Disponible para nuevos proyectos</span>
+      </div>
+      <span class="hidden sm:inline text-base-700">|</span>
+      <span>© {currentYear} Samuel Ortiz. <span data-i18n="footer.rights">Todos los derechos reservados.</span></span>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <a
+        href="https://github.com/SamuelOrtizS"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-base-400 hover:text-primary-400 transition-colors underline-ltr py-0.5"
+        aria-label="GitHub Profile"
+      >
+        GitHub
+      </a>
+      <a
+        href="https://linkedin.com/in/samuelortizs"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-base-400 hover:text-primary-400 transition-colors underline-ltr py-0.5"
+        aria-label="LinkedIn Profile"
+      >
+        LinkedIn
+      </a>
+      <a
+        href="mailto:contact@samuelortiz.dev"
+        class="text-base-400 hover:text-primary-400 transition-colors underline-ltr py-0.5"
+        aria-label="Email Samuel Ortiz"
+      >
+        Email
+      </a>
+    </div>
+  </div>
+</footer>

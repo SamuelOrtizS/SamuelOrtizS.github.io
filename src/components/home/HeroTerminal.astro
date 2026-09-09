@@ -1,0 +1,145 @@
+---
+import Button from '../ui/Button.astro';
+---
+
+<section class="pt-12 md:pt-20 pb-16 border-b border-base-800">
+  <div class="site-container">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      
+      <!-- Left Column: Bio & Calls to Action -->
+      <div class="lg:col-span-7 flex flex-col items-start gap-6">
+        
+        <!-- Status Indicator -->
+        <div class="badge-enter inline-flex items-center gap-2 px-3 py-1 text-xs border border-base-700 bg-base-950 text-base-300">
+          <span class="w-2 h-2 rounded-full bg-primary-500 animate-pulse"></span>
+          <span data-i18n="hero.badge">Disponible para colaboraciones</span>
+        </div>
+
+        <h1 class="headline-enter text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-base-100 leading-tight">
+          <span data-i18n="hero.greeting">Hola, soy</span> <span class="text-primary-500 underline decoration-primary-500/40 underline-offset-8">Samuel Ortiz Sarasti</span>.
+        </h1>
+
+        <p class="body-enter text-base text-base-300 leading-relaxed max-w-xl">
+          <span data-i18n="hero.bio">Estudiante de Ingeniería Eléctrica en la Universidad del Valle. Apasionado por las telecomunicaciones, sistemas embebidos, gestión de red eléctrica y software con impacto social.</span>
+        </p>
+
+        <!-- Tech Badges -->
+        <div class="reveal-stagger flex flex-wrap gap-2 pt-1">
+          {
+            ['Ingeniería Eléctrica', 'Telecomunicaciones', 'Sistemas Embebidos', 'Redes Eléctricas', 'IEEE ComSoc', 'TypeScript', 'Astro', 'Next.js'].map((tech) => (
+              <span class="px-2.5 py-1 text-xs font-mono bg-base-950 border border-base-800 text-base-300 hover:border-primary-500/60 hover:text-primary-400 transition-colors">
+                {tech}
+              </span>
+            ))
+          }
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="reveal flex flex-wrap items-center gap-4 pt-4">
+          <Button href="#projects" variant="primary">
+            <span data-i18n="hero.cta_projects">Ver Proyectos</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </Button>
+
+          <Button href="/contact" variant="outline">
+            <span data-i18n="hero.cta_contact">Contáctame</span>
+          </Button>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Terminal / Interactive Console -->
+      <div class="lg:col-span-5 w-full">
+        <div class="terminal-enter rounded-none border border-base-700 bg-base-950 shadow-2xl overflow-hidden">
+          
+          <!-- Terminal Header -->
+          <div class="flex items-center justify-between px-4 py-3 border-b border-base-800 bg-base-950/80">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-base-700 inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-base-700 inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-base-700 inline-block"></span>
+              <span class="text-xs text-base-400 font-mono ml-2" data-i18n="hero.terminal_title">samuel@univalle: ~</span>
+            </div>
+            
+            <button
+              type="button"
+              id="copy-terminal-btn"
+              class="text-xs text-base-400 hover:text-primary-400 flex items-center gap-1 transition-colors px-2 py-0.5 border border-transparent hover:border-base-700"
+              aria-label="Copy terminal contents"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span id="copy-btn-text">copy</span>
+            </button>
+          </div>
+
+          <!-- Terminal Body / Content -->
+          <div class="p-5 font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto text-base-200">
+            <div class="flex items-center gap-2 text-base-400 mb-2">
+              <span class="text-primary-500">$</span>
+              <span>cat samuel.config.ts</span>
+            </div>
+            
+            <pre class="text-base-300"><span class="text-primary-400">export const</span> developer = &#123;
+  name: <span class="text-primary-300">'Samuel Ortiz Sarasti'</span>,
+  program: <span class="text-primary-300">'Ingeniería Eléctrica'</span>,
+  university: <span class="text-primary-300">'Universidad del Valle'</span>,
+  role: <span class="text-primary-300">'Presidente IEEE ComSoc Univalle'</span>,
+  focus: [
+    <span class="text-primary-300">'Telecomunicaciones'</span>,
+    <span class="text-primary-300">'Sistemas Embebidos'</span>,
+    <span class="text-primary-300">'Gestión de Red Eléctrica'</span>
+  ],
+  status: <span class="text-primary-500">'Disponible para colaboraciones'</span>,
+  email: <span class="text-primary-300">'samuel.ortiz@correounivalle.edu.co'</span>
+&#125;;</pre>
+
+            <div class="flex items-center gap-2 text-base-400 mt-4">
+              <span class="text-primary-500">$</span>
+              <span class="cursor-blink inline-block w-2.5 h-4 bg-primary-500"></span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  function setupTerminalCopy() {
+    const copyBtn = document.getElementById('copy-terminal-btn');
+    const copyText = document.getElementById('copy-btn-text');
+    
+    if (copyBtn && copyText) {
+      copyBtn.addEventListener('click', async () => {
+        const code = `export const developer = {
+  name: 'Samuel Ortiz Sarasti',
+  program: 'Ingeniería Eléctrica',
+  university: 'Universidad del Valle',
+  role: 'Presidente IEEE ComSoc Univalle',
+  focus: ['Telecomunicaciones', 'Sistemas Embebidos', 'Gestión de Red Eléctrica'],
+  status: 'Disponible para colaboraciones',
+  email: 'samuel.ortiz@correounivalle.edu.co'
+};`;
+        try {
+          await navigator.clipboard.writeText(code);
+          copyText.textContent = 'copied!';
+          setTimeout(() => {
+            copyText.textContent = 'copy';
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy', err);
+        }
+      });
+    }
+  }
+
+  document.addEventListener('astro:page-load', setupTerminalCopy);
+</script>

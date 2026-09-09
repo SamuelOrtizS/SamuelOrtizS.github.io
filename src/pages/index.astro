@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroTerminal from '../components/home/HeroTerminal.astro';
+import FeaturedProjects from '../components/home/FeaturedProjects.astro';
+import ExperienceGrid from '../components/home/ExperienceGrid.astro';
+import RecentPosts from '../components/home/RecentPosts.astro';
+---
+
+<BaseLayout
+  title="Samuel Ortiz | Software Engineer & Web Developer"
+  description="Personal website and portfolio of Samuel Ortiz. Building resilient architectures, static web applications, and developer-first craft."
+>
+ <!-- Hero Section with Terminal -->
+ <HeroTerminal />
+
+ <!-- Featured Projects -->
+ <FeaturedProjects />
+
+ <!-- Career Experience Grid -->
+ <ExperienceGrid />
+
+ <!-- Recent Writing / Blog Posts -->
+ <RecentPosts />
+</BaseLayout>

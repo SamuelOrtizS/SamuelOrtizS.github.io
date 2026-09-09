@@ -1,0 +1,371 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+
+const initialBody = `import Admonition from '../../components/ui/Admonition.astro';
+import Newsletter from '../../components/ui/Newsletter.astro';
+
+<Admonition variant="tip" title="NOTA INICIAL">
+  Este es un aviso destacado para los lectores.
+</Admonition>
+
+## Introducción
+
+Escribe aquí el contenido de tu artículo utilizando **negrita**, *cursiva*, \`código en línea\` y enlaces.
+
+\`\`\`typescript
+// Bloque de código de ejemplo
+const canal = "ComSoc Univalle";
+console.log("Transmitiendo en el canal");
+\`\`\`
+
+## Tabla Comparativa
+
+| Parámetro | Valor Típico | Unidad |
+| :--- | :--- | :--- |
+| Ancho de Banda | 20 | MHz |
+| Frecuencia | 2.4 | GHz |
+
+<Newsletter />`;
+---
+
+<BaseLayout
+  title="Creador de Artículos MDX | Samuel Ortiz"
+  description="Herramienta interactiva para generar y descargar archivos .mdx listos para publicar en el blog."
+>
+  <div class="site-container pt-10 md:pt-14 pb-20">
+
+    <!-- Page Header -->
+    <header class="reveal pb-6 mb-8 border-b border-base-800">
+      <div class="flex items-center gap-2 text-xs font-mono text-primary-400 mb-2">
+        <span class="inline-block w-2 h-2 bg-primary-400 animate-pulse"></span>
+        <span>~/blogcreator</span>
+        <span class="text-base-600">/</span>
+        <span class="text-primary-400 font-medium">Herramienta Interna</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-medium tracking-tight text-base-100 font-mono">
+        Creador de Artículos MDX
+      </h1>
+      <p class="mt-2 text-xs sm:text-sm text-base-300 max-w-2xl leading-relaxed font-mono">
+        Genera el Frontmatter y estructura con todas las funciones del blog (Admonitions, Código, Tablas, Newsletter) y descarga el archivo <code class="text-primary-400 px-1 bg-base-900 border border-base-800">.mdx</code> para guardar en <code class="text-primary-400 px-1 bg-base-900 border border-base-800">src/content/blog/</code>.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start w-full">
+
+      <!-- Left Column: Form & Controls -->
+      <div class="w-full min-w-0 flex flex-col gap-6">
+
+        <!-- Metadata Form -->
+        <div class="p-5 bg-base-950 border border-base-800 flex flex-col gap-4">
+          <div class="flex items-center justify-between border-b border-base-800/80 pb-3">
+            <h2 class="text-xs font-mono text-primary-400 uppercase tracking-wider font-semibold">
+              // Metadata (Frontmatter)
+            </h2>
+            <span class="text-xs font-mono text-base-500">FORMATO MDX</span>
+          </div>
+
+          <div class="flex flex-col gap-1.5">
+            <label for="post-title" class="text-xs font-mono text-base-300">Título del Artículo *</label>
+            <input
+              id="post-title"
+              type="text"
+              placeholder="Ej. Introducción a Telecomunicaciones y Redes"
+              value="Mi Nuevo Artículo de Telecomunicaciones"
+              class="w-full px-3 py-2 text-xs font-mono bg-base-900 border border-base-700 text-base-100 placeholder:text-base-600 focus:outline-none focus:border-primary-400 transition-colors"
+            />
+          </div>
+
+          <div class="flex flex-col gap-1.5">
+            <label for="post-filename" class="text-xs font-mono text-base-300">Nombre de Archivo / Slug (.mdx) *</label>
+            <div class="relative flex items-center w-full">
+              <input
+                id="post-filename"
+                type="text"
+                placeholder="ej-introduccion-telecomunicaciones"
+                value="mi-nuevo-articulo-telecomunicaciones"
+                class="w-full px-3 py-2 text-xs font-mono bg-base-900 border border-base-700 text-primary-400 placeholder:text-base-600 focus:outline-none focus:border-primary-400 transition-colors pr-12"
+              />
+              <span class="absolute right-3 text-xs font-mono text-base-500 pointer-events-none">.mdx</span>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-1.5">
+            <label for="post-desc" class="text-xs font-mono text-base-300">Descripción / Resumen *</label>
+            <textarea
+              id="post-desc"
+              rows="2"
+              placeholder="Breve resumen para tarjetas de vista previa y SEO..."
+              class="w-full px-3 py-2 text-xs font-mono bg-base-900 border border-base-700 text-base-100 placeholder:text-base-600 focus:outline-none focus:border-primary-400 transition-colors resize-none leading-relaxed"
+            >Una guía completa sobre principios de transmisión de señales y arquitecturas de telecomunicaciones.</textarea>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="flex flex-col gap-1.5">
+              <label for="post-tags" class="text-xs font-mono text-base-300">Etiquetas (separadas por coma)</label>
+              <input
+                id="post-tags"
+                type="text"
+                value="Telecomunicaciones, IEEE, Ingeniería"
+                class="w-full px-3 py-2 text-xs font-mono bg-base-900 border border-base-700 text-base-100 focus:outline-none focus:border-primary-400 transition-colors"
+              />
+            </div>
+
+            <div class="flex flex-col gap-1.5 justify-end">
+              <label class="inline-flex items-center gap-2.5 text-xs font-mono text-base-300 cursor-pointer py-2 select-none">
+                <input id="post-draft" type="checkbox" class="w-4 h-4 accent-primary-500 rounded-none bg-base-900 border-base-700" />
+                <span>Borrador (<code class="text-amber-400">draft: true</code>)</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Snippet Generators -->
+        <div class="p-5 bg-base-950 border border-base-800 flex flex-col gap-3">
+          <div class="flex items-center justify-between border-b border-base-800/80 pb-2.5">
+            <h2 class="text-xs font-mono text-primary-400 uppercase tracking-wider font-semibold">
+              // Insertar Componentes Rápidos
+            </h2>
+            <span class="text-xs font-mono text-base-500">CLIC PARA INSERTAR</span>
+          </div>
+
+          <div class="flex flex-wrap gap-2 pt-1">
+            <button type="button" class="insert-btn px-2.5 py-1.5 text-xs font-mono border border-primary-500/50 bg-primary-950/30 text-primary-300 hover:bg-primary-500 hover:text-base-950 transition-all active:scale-95" data-snippet="tip">
+              + Admonition TIP
+            </button>
+            <button type="button" class="insert-btn px-2.5 py-1.5 text-xs font-mono border border-sky-500/50 bg-sky-950/30 text-sky-300 hover:bg-sky-500 hover:text-base-950 transition-all active:scale-95" data-snippet="info">
+              + Admonition INFO
+            </button>
+            <button type="button" class="insert-btn px-2.5 py-1.5 text-xs font-mono border border-amber-500/50 bg-amber-950/30 text-amber-300 hover:bg-amber-500 hover:text-base-950 transition-all active:scale-95" data-snippet="caution">
+              + Admonition CAUTION
+            </button>
+            <button type="button" class="insert-btn px-2.5 py-1.5 text-xs font-mono border border-rose-500/50 bg-rose-950/30 text-rose-300 hover:bg-rose-500 hover:text-base-950 transition-all active:scale-95" data-snippet="danger">
+              + Admonition DANGER
+            </button>
+            <button type="button" class="insert-btn px-2.5 py-1.5 text-xs font-mono border border-base-700 bg-base-900 text-base-300 hover:border-primary-400 hover:text-primary-400 transition-all active:scale-95" data-snippet="table">
+              + Tabla Comparativa
+            </button>
+            <button type="button" class="insert-btn px-2.5 py-1.5 text-xs font-mono border border-base-700 bg-base-900 text-base-300 hover:border-primary-400 hover:text-primary-400 transition-all active:scale-95" data-snippet="code">
+              + Bloque de Código
+            </button>
+            <button type="button" class="insert-btn px-2.5 py-1.5 text-xs font-mono border border-base-700 bg-base-900 text-base-300 hover:border-primary-400 hover:text-primary-400 transition-all active:scale-95" data-snippet="newsletter">
+              + Formulario Newsletter
+            </button>
+          </div>
+        </div>
+
+        <!-- Body Markdown Editor -->
+        <div class="flex flex-col gap-2">
+          <div class="flex items-center justify-between">
+            <label for="post-body" class="text-xs font-mono text-base-300 uppercase tracking-wider font-semibold">Cuerpo del Artículo (MDX)</label>
+            <span class="text-xs font-mono text-base-500">SOPORTA MARKDOWN Y JSX</span>
+          </div>
+          <textarea
+            id="post-body"
+            rows="14"
+            class="w-full px-3.5 py-3 text-xs font-mono bg-base-950 border border-base-700 text-base-100 placeholder:text-base-600 focus:outline-none focus:border-primary-400 transition-colors resize-y leading-relaxed"
+          >{initialBody}</textarea>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex flex-wrap items-center gap-4 pt-2">
+          <Button variant="primary" id="download-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Descargar Archivo .mdx</span>
+          </Button>
+
+          <button
+            type="button"
+            id="copy-mdx-btn"
+            class="button--outline text-xs py-2 px-4 inline-flex items-center gap-2 font-mono transition-all"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-primary-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span id="copy-btn-text">Copiar al Portapapeles</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Code Live Preview -->
+      <div class="w-full min-w-0 flex flex-col gap-3 lg:sticky lg:top-20">
+        
+        <!-- Terminal Box Header -->
+        <div class="bg-base-950 border border-base-800 overflow-hidden w-full">
+          <div class="px-4 py-2.5 bg-base-900 border-b border-base-800 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80 inline-block"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block"></span>
+              <span id="preview-filename-badge" class="ml-2 text-xs font-mono text-base-300">articulo.mdx</span>
+            </div>
+            <span class="text-xs font-mono text-primary-400 uppercase tracking-wider">// GENERADO</span>
+          </div>
+
+          <pre class="p-4 text-xs font-mono text-base-200 overflow-x-auto max-h-[600px] leading-relaxed select-all bg-base-950/90 whitespace-pre" id="output-preview"></pre>
+        </div>
+
+        <!-- Helper Footer Callout -->
+        <div class="p-3.5 bg-base-950 border border-base-800 text-xs font-mono text-base-400 flex items-start gap-2.5 w-full">
+          <span class="text-primary-400 font-bold shrink-0">➜</span>
+          <p class="leading-relaxed">
+            <strong class="text-base-200">Guía de integración:</strong> Guarda el archivo descargado en <code class="text-primary-400 bg-base-900 px-1 border border-base-800">src/content/blog/[slug].mdx</code>. Astro renderizará el artículo automáticamente en la ruta <code class="text-primary-400 bg-base-900 px-1 border border-base-800">/blog/[slug]</code>.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</BaseLayout>
+
+<script>
+  function initCreator() {
+    const titleInput = document.getElementById('post-title') as HTMLInputElement | null;
+    const filenameInput = document.getElementById('post-filename') as HTMLInputElement | null;
+    const descInput = document.getElementById('post-desc') as HTMLTextAreaElement | null;
+    const tagsInput = document.getElementById('post-tags') as HTMLInputElement | null;
+    const draftInput = document.getElementById('post-draft') as HTMLInputElement | null;
+    const bodyInput = document.getElementById('post-body') as HTMLTextAreaElement | null;
+    const outputPreview = document.getElementById('output-preview');
+    const previewFilenameBadge = document.getElementById('preview-filename-badge');
+    const downloadBtn = document.getElementById('download-btn');
+    const copyBtn = document.getElementById('copy-mdx-btn');
+    const copyBtnText = document.getElementById('copy-btn-text');
+
+    // Auto-generate slug from title
+    if (titleInput && filenameInput) {
+      titleInput.addEventListener('input', () => {
+        const slug = titleInput.value
+          .toLowerCase()
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/[^a-z0-9\s-]/g, '')
+          .trim()
+          .replace(/\s+/g, '-');
+        filenameInput.value = slug || 'nuevo-articulo';
+        updateOutput();
+      });
+    }
+
+    function generateMDX(): string {
+      const title = titleInput?.value.trim() || 'Nuevo Artículo';
+      const desc = descInput?.value.trim() || 'Descripción del artículo';
+      const tags = (tagsInput?.value || '')
+        .split(',')
+        .map((t) => t.trim())
+        .filter(Boolean);
+      const isDraft = draftInput?.checked || false;
+      const body = bodyInput?.value || '';
+
+      const tagsFormatted = JSON.stringify(tags);
+      const dateStr = new Date().toISOString().split('T')[0];
+
+      return `---
+title: '${title.replace(/'/g, "\\'")}'
+description: '${desc.replace(/'/g, "\\'")}'
+pubDate: ${dateStr}
+tags: ${tagsFormatted}
+draft: ${isDraft}
+---
+${body.trim()}`;
+    }
+
+    function updateOutput() {
+      const content = generateMDX();
+      if (outputPreview) {
+        outputPreview.textContent = content;
+      }
+      if (previewFilenameBadge && filenameInput) {
+        const slug = filenameInput.value.trim() || 'articulo';
+        previewFilenameBadge.textContent = slug.endsWith('.mdx') ? slug : `${slug}.mdx`;
+      }
+    }
+
+    // Attach listeners
+    [titleInput, filenameInput, descInput, tagsInput, draftInput, bodyInput].forEach((el) => {
+      el?.addEventListener('input', updateOutput);
+      el?.addEventListener('change', updateOutput);
+    });
+
+    // Snippet insertion buttons
+    const snippets: Record<string, string> = {
+      tip: '\n<Admonition variant="tip" title="CONSEJO">\n  Escribe tu consejo aquí.\n</Admonition>\n',
+      info: '\n<Admonition variant="info" title="INFORMACIÓN">\n  Información adicional aquí.\n</Admonition>\n',
+      caution: '\n<Admonition variant="caution" title="ADVERTENCIA">\n  Advertencia importante aquí.\n</Admonition>\n',
+      danger: '\n<Admonition variant="danger" title="ALERTA CRÍTICA">\n  Peligro o acción crítica aquí.\n</Admonition>\n',
+      table: '\n| Columna 1 | Columna 2 | Columna 3 |\n| :--- | :--- | :--- |\n| Dato A | Dato B | Dato C |\n',
+      code: '\n```typescript\n// Escribe tu código aquí\nconst x = 10;\n```\n',
+      newsletter: '\n<Newsletter />\n',
+    };
+
+    document.querySelectorAll<HTMLButtonElement>('.insert-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const type = btn.getAttribute('data-snippet');
+        if (type && snippets[type] && bodyInput) {
+          const start = bodyInput.selectionStart;
+          const end = bodyInput.selectionEnd;
+          const currentVal = bodyInput.value;
+          const snippetText = snippets[type];
+          
+          bodyInput.value = currentVal.substring(0, start) + snippetText + currentVal.substring(end);
+          bodyInput.focus();
+          bodyInput.selectionStart = bodyInput.selectionEnd = start + snippetText.length;
+          
+          updateOutput();
+        }
+      });
+    });
+
+    // Download action
+    if (downloadBtn) {
+      downloadBtn.addEventListener('click', () => {
+        const content = generateMDX();
+        const rawFilename = filenameInput?.value.trim() || 'articulo';
+        const filename = rawFilename.endsWith('.mdx') ? rawFilename : `${rawFilename}.mdx`;
+
+        const blob = new Blob([content], { type: 'text/markdown;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      });
+    }
+
+    // Copy to clipboard action
+    if (copyBtn && copyBtnText) {
+      copyBtn.addEventListener('click', async () => {
+        const content = generateMDX();
+        try {
+          await navigator.clipboard.writeText(content);
+          const origText = copyBtnText.textContent;
+          copyBtnText.textContent = '✓ Copiado al Portapapeles!';
+          copyBtn.classList.add('border-primary-500', 'text-primary-400');
+          setTimeout(() => {
+            copyBtnText.textContent = origText;
+            copyBtn.classList.remove('border-primary-500', 'text-primary-400');
+          }, 2500);
+        } catch (err) {
+          console.error('Failed to copy', err);
+        }
+      });
+    }
+
+    // Initial load update
+    updateOutput();
+  }
+
+  document.addEventListener('astro:page-load', initCreator);
+  initCreator();
+</script>
+

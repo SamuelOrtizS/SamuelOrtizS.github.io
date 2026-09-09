@@ -1,0 +1,102 @@
+---
+title: 'Guía de Componentes & Funciones MDX (Solo Vista Desarrollo)'
+description: 'Artículo interactivo de prueba para verificar Admonitions, código, fórmulas, listas, tablas y componentes de boletín en desarrollo.'
+pubDate: 2026-09-09
+tags: ['MDX', 'Desarrollo', 'Pruebas', 'Componentes']
+draft: true
+---
+import Admonition from '../../components/ui/Admonition.astro';
+import Newsletter from '../../components/ui/Newsletter.astro';
+
+<Admonition variant="caution" title="MODO DESARROLLO (DRAFT)">
+  Este artículo tiene `draft: true` en su frontmatter. Es visible únicamente al ejecutar `npm run dev`. No se compilará ni se incluirá en el sitio final en producción (`npm run build`).
+</Admonition>
+
+¡Bienvenido a la entrada de demostración MDX! Esta página sirve como catálogo vivo para verificar la correcta renderización de todos los elementos tipográficos, bloques de código y componentes interactivos del tema **Quantum Astro**.
+
+---
+
+## 1. Variantes de Admonitions (`<Admonition />`)
+
+Los avisos interactivos soportan 4 variantes visuales distintas según la intención de la nota:
+
+<Admonition variant="tip" title="CONSEJO DE PERFORMANCE">
+  Utiliza el componente `<Admonition variant="tip" />` para resaltar buenas prácticas, optimizaciones o tips rápidos de rendimiento.
+</Admonition>
+
+<Admonition variant="info" title="INFORMACIÓN GENERAL">
+  Utiliza `<Admonition variant="info" />` para agregar contexto secundario, enlaces a documentación oficial o explicaciones adicionales.
+</Admonition>
+
+<Admonition variant="caution" title="ADVERTENCIA DE CONFIGURACIÓN">
+  Utiliza `<Admonition variant="caution" />` para alertar sobre configuraciones delicadas o posibles incompatibilidades de versión.
+</Admonition>
+
+<Admonition variant="danger" title="ALERTA CRÍTICA">
+  Utiliza `<Admonition variant="danger" />` para señalar acciones de alto riesgo, variables deprecadas o fallos potenciales.
+</Admonition>
+
+---
+
+## 2. Formato de Texto & Estilos Tipográficos
+
+Puedes utilizar **negrita**, *cursiva*, `código en línea`, y [enlaces externos](https://docs.astro.build) dentro de tus párrafos.
+
+> "El código es como el humor. Cuando tienes que explicarlo, es malo." — Cory House
+
+### Listas Desordenadas & Ordenadas
+
+- **Sistemas Embebidos**: Microcontroladores ESP32, STM32 y C/C++.
+- **Telecomunicaciones**: Procesamiento de señales, antenas y modulación.
+- **Desarrollo Web**:
+  - Astro (Static-First Output)
+  - Next.js / React
+  - Tailwind CSS v4
+
+1. Inicializar el entorno con `npm run dev`.
+2. Crear un nuevo archivo `.md` o `.mdx` en `src/content/blog/`.
+3. Validar los cambios localmente en el navegador.
+
+---
+
+## 3. Bloques de Código con Resaltado Sintáctico
+
+```typescript
+// Ejemplo de interfaz tipada en TypeScript
+export interface EngineeringProfile {
+  name: string;
+  university: string;
+  focus: string[];
+  isIEEEActive: boolean;
+}
+
+export function getStatus(profile: EngineeringProfile): string {
+  return `${profile.name} - ${profile.university} (${profile.focus.join(', ')})`;
+}
+```
+
+```css
+/* Ejemplo de estilos Quantum en global.css */
+@theme {
+  --color-primary-500: oklch(74.72% 0.2439 141.89);
+  --font-mono: "JetBrains Mono Variable", monospace;
+}
+```
+
+---
+
+## 4. Tablas Comparativas
+
+| Tecnología | Tipo de Salida | Rendimiento | Uso Recomendado |
+| :--- | :--- | :--- | :--- |
+| **Astro** | Estático Puro / SSR | 100/100 CWV | Sitios personales, blogs, docs |
+| **Next.js** | SSR / SSG / ISR | Dinámico | Aplicaciones SaaS complejas |
+| **Tailwind v4** | CSS Nativo Vite | Sub-50ms HMR | Sistemas de diseño modernos |
+
+---
+
+## 5. Componente Integrado de Suscripción (`<Newsletter />`)
+
+Puedes incrustar componentes interactivos directos en cualquier parte de tus artículos MDX:
+
+<Newsletter />

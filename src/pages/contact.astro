@@ -1,0 +1,295 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const channels = [
+  {
+    label: 'Email',
+    value: 'samuel.ortiz@correounivalle.edu.co',
+    href: 'mailto:samuel.ortiz@correounivalle.edu.co',
+    copyable: true,
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>`,
+  },
+  {
+    label: 'GitHub',
+    value: 'github.com/SamuelOrtizS',
+    href: 'https://github.com/SamuelOrtizS/',
+    copyable: false,
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>`,
+  },
+  {
+    label: 'LinkedIn',
+    value: 'linkedin.com/in/samuel-ortiz-875b42178',
+    href: 'https://www.linkedin.com/in/samuel-ortiz-875b42178/',
+    copyable: false,
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>`,
+  },
+];
+---
+
+<BaseLayout
+  title="Contacto | Samuel Ortiz Sarasti"
+  description="Ponte en contacto con Samuel Ortiz Sarasti para colaboraciones, eventos de IEEE o proyectos técnicos."
+>
+  <div class="site-container pt-12 md:pt-16 pb-20">
+
+    <!-- Page Header -->
+    <header class="reveal pb-8 mb-12 border-b border-base-800">
+      <div class="text-xs font-mono text-primary-500 mb-2">~/contact</div>
+      <h1 class="text-3xl sm:text-4xl font-medium tracking-tight text-base-100 mb-4" data-i18n="contact.title">
+        Ponte en Contacto
+      </h1>
+      <p class="text-base text-base-300 max-w-2xl" data-i18n="contact.subtitle">
+        ¿Tienes interés en colaborar, realizar un evento o consultar sobre un proyecto? Envíame un mensaje.
+      </p>
+    </header>
+
+    <!-- Two-Column Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+
+      <!-- Left: Context + Channels -->
+      <div class="reveal lg:col-span-5 flex flex-col gap-8">
+
+        <!-- Availability -->
+        <div class="badge-enter inline-flex items-center gap-2 text-xs font-mono text-base-300 px-3 py-1.5 border border-base-800 bg-base-950 self-start">
+          <span class="w-2 h-2 rounded-full bg-primary-500 animate-pulse"></span>
+          <span data-i18n="contact.availability_val">Disponible para colaboraciones</span>
+        </div>
+
+        <!-- Direct Channels -->
+        <div class="flex flex-col gap-3 pt-2">
+          <span class="text-xs font-mono text-primary-500 uppercase tracking-wider" data-i18n="contact.channels_title">
+            // Contacto Directo
+          </span>
+
+          <div class="reveal-stagger flex flex-col gap-3">
+            {channels.map((channel) => (
+              <div class="flex items-center justify-between gap-3 p-3 bg-base-950 border border-base-800 hover:border-base-700 transition-colors group">
+                <a
+                  href={channel.href}
+                  target={channel.copyable ? undefined : '_blank'}
+                  rel={channel.copyable ? undefined : 'noopener noreferrer'}
+                  class="flex items-center gap-3 text-sm text-base-200 hover:text-primary-400 transition-colors no-underline"
+                  aria-label={`${channel.label}: ${channel.value}`}
+                >
+                  <span class="text-primary-500 shrink-0">
+                    <Fragment set:html={channel.icon} />
+                  </span>
+                  <div class="flex flex-col">
+                    <span class="text-[10px] font-mono text-base-500 uppercase tracking-wider">{channel.label}</span>
+                    <span class="font-mono text-xs text-base-300 group-hover:text-primary-400 transition-colors">{channel.value}</span>
+                  </div>
+                </a>
+
+                {channel.copyable && (
+                  <button
+                    type="button"
+                    data-copy={channel.value}
+                    class="copy-btn text-xs font-mono text-base-500 hover:text-primary-400 transition-colors px-2 py-1 border border-transparent hover:border-base-700 shrink-0"
+                    aria-label={`Copy ${channel.label} to clipboard`}
+                  >
+                    copy
+                  </button>
+                )}
+
+                {!channel.copyable && (
+                  <span class="text-base-600 text-xs font-mono shrink-0">↗</span>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right: Contact Form -->
+      <div class="terminal-enter lg:col-span-7">
+        <span class="text-xs font-mono text-primary-500 uppercase tracking-wider block mb-6">
+          // Formulario de Contacto
+        </span>
+
+        <!-- Success / Error states (hidden by default) -->
+        <div id="form-success" class="hidden mb-6 p-4 bg-primary-950/30 border border-primary-500/60 text-sm text-primary-400 font-mono">
+          ✓ Mensaje enviado con éxito. Te responderé lo antes posible.
+        </div>
+        <div id="form-error" class="hidden mb-6 p-4 bg-red-950/30 border border-red-500/60 text-sm text-red-400 font-mono">
+          Ocurrió un error. Puedes escribirme directamente a samuel.ortiz@correounivalle.edu.co
+        </div>
+
+        <form
+          id="contact-form"
+          action="https://formspree.io/f/xgaerlwp"
+          method="POST"
+          class="flex flex-col gap-5"
+          novalidate
+        >
+          <!-- Name + Email Row -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div class="flex flex-col gap-1.5">
+              <label for="contact-name" class="text-xs font-mono text-base-400 uppercase tracking-wider" data-i18n="contact.form_name">
+                Nombre Completo
+              </label>
+              <input
+                id="contact-name"
+                name="name"
+                type="text"
+                required
+                autocomplete="name"
+                placeholder="Ej. Juan Pérez"
+                data-i18n-placeholder="contact.form_name_placeholder"
+                class="contact-input px-3.5 py-2.5 text-sm font-mono bg-base-950 border border-base-700 text-base-100 placeholder:text-base-600 focus:outline-none focus:border-primary-500 transition-colors"
+              />
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label for="contact-email" class="text-xs font-mono text-base-400 uppercase tracking-wider" data-i18n="contact.form_email">
+                Correo Electrónico
+              </label>
+              <input
+                id="contact-email"
+                name="email"
+                type="email"
+                required
+                autocomplete="email"
+                placeholder="juan@ejemplo.com"
+                data-i18n-placeholder="contact.form_email_placeholder"
+                class="contact-input px-3.5 py-2.5 text-sm font-mono bg-base-950 border border-base-700 text-base-100 placeholder:text-base-600 focus:outline-none focus:border-primary-500 transition-colors"
+              />
+            </div>
+          </div>
+
+          <!-- Subject -->
+          <div class="flex flex-col gap-1.5">
+            <label for="contact-subject" class="text-xs font-mono text-base-400 uppercase tracking-wider" data-i18n="contact.form_subject">
+              Asunto
+            </label>
+            <input
+              id="contact-subject"
+              name="subject"
+              type="text"
+              required
+              placeholder="Ej. Colaboración / Evento IEEE"
+              data-i18n-placeholder="contact.form_subject_placeholder"
+              class="contact-input px-3.5 py-2.5 text-sm font-mono bg-base-950 border border-base-700 text-base-100 placeholder:text-base-600 focus:outline-none focus:border-primary-500 transition-colors"
+            />
+          </div>
+
+          <!-- Message -->
+          <div class="flex flex-col gap-1.5">
+            <label for="contact-message" class="text-xs font-mono text-base-400 uppercase tracking-wider" data-i18n="contact.form_message">
+              Mensaje
+            </label>
+            <textarea
+              id="contact-message"
+              name="message"
+              required
+              rows="6"
+              placeholder="Cuéntame sobre tu propuesta o consulta..."
+              data-i18n-placeholder="contact.form_message_placeholder"
+              class="contact-input px-3.5 py-2.5 text-sm font-mono bg-base-950 border border-base-700 text-base-100 placeholder:text-base-600 focus:outline-none focus:border-primary-500 transition-colors resize-none leading-relaxed"
+            ></textarea>
+          </div>
+
+          <!-- Honeypot (anti-spam) -->
+          <input type="text" name="_gotcha" class="hidden" tabindex="-1" aria-hidden="true" />
+
+          <!-- Submit -->
+          <div class="flex items-center justify-end gap-4 pt-2">
+            <button
+              type="submit"
+              id="submit-btn"
+              class="button--primary text-sm py-2.5 px-6"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+              <span id="submit-label" data-i18n="contact.form_submit">Enviar Mensaje</span>
+            </button>
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .contact-input:focus {
+    box-shadow: 0 0 0 1px var(--color-primary-500);
+  }
+  .contact-input[aria-invalid="true"] {
+    border-color: var(--color-error);
+  }
+</style>
+
+<script>
+  function initContact() {
+    // Copy-to-clipboard for email
+    document.querySelectorAll<HTMLButtonElement>('.copy-btn').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const text = btn.getAttribute('data-copy');
+        if (!text) return;
+        try {
+          await navigator.clipboard.writeText(text);
+          btn.textContent = 'copied!';
+          setTimeout(() => { btn.textContent = 'copy'; }, 2000);
+        } catch {}
+      });
+    });
+
+    // AJAX form submission to Formspree
+    const form = document.getElementById('contact-form') as HTMLFormElement | null;
+    const successEl = document.getElementById('form-success');
+    const errorEl = document.getElementById('form-error');
+    const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement | null;
+    const submitLabel = document.getElementById('submit-label');
+
+    if (form && submitBtn && submitLabel) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Basic client-side validation
+        const inputs = form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('.contact-input');
+        let valid = true;
+        inputs.forEach((input) => {
+          if (!input.value.trim()) {
+            input.setAttribute('aria-invalid', 'true');
+            valid = false;
+          } else {
+            input.removeAttribute('aria-invalid');
+          }
+        });
+        if (!valid) return;
+
+        submitLabel.textContent = 'Enviando…';
+        submitBtn.disabled = true;
+
+        try {
+          const data = new FormData(form);
+          const res = await fetch(form.action, {
+            method: 'POST',
+            body: data,
+            headers: { Accept: 'application/json' },
+          });
+
+          if (res.ok) {
+            form.reset();
+            successEl?.classList.remove('hidden');
+            errorEl?.classList.add('hidden');
+          } else {
+            throw new Error('Non-200');
+          }
+        } catch {
+          errorEl?.classList.remove('hidden');
+          successEl?.classList.add('hidden');
+        } finally {
+          submitLabel.textContent = 'Enviar Mensaje';
+          submitBtn.disabled = false;
+        }
+      });
+    }
+  }
+
+  document.addEventListener('astro:page-load', initContact);
+</script>

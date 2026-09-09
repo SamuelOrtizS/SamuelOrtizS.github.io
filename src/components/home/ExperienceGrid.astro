@@ -1,0 +1,81 @@
+---
+const experiences = [
+  {
+    roleKey: 'exp.r1_role',
+    defaultRole: 'Presidente',
+    companyKey: 'exp.r1_company',
+    defaultCompany: 'IEEE ComSoc Univalle',
+    periodKey: 'exp.r1_period',
+    defaultPeriod: 'Presente',
+    descKey: 'exp.r1_desc',
+    defaultDesc: 'Lidero el capítulo estudiantil de IEEE Communications Society en la Universidad del Valle. Organizo eventos y actividades académicas, promoviendo el conocimiento técnico en telecomunicaciones.',
+    skills: ['Liderazgo', 'Gestión de Equipos', 'Organización de Eventos', 'Comunicación'],
+  },
+  {
+    roleKey: 'exp.r2_role',
+    defaultRole: 'Vicepresidente',
+    companyKey: 'exp.r2_company',
+    defaultCompany: 'Rama Estudiantil IEEE Univalle',
+    periodKey: 'exp.r2_period',
+    defaultPeriod: 'Anteriormente',
+    descKey: 'exp.r2_desc',
+    defaultDesc: 'Co-lideré la rama estudiantil IEEE Univalle. Logré el incremento de miembros de ~30 a más de 120 durante mi gestión, promoviendo el desarrollo técnico en ingeniería eléctrica y electrónica.',
+    skills: ['Liderazgo', 'Gestión de Equipos', 'Crecimiento Comunitario', 'Planificación Estratégica'],
+  },
+];
+---
+
+<section id="experience" class="py-16 border-b border-base-800">
+  <div class="site-container">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+      
+      <!-- Left Column: Experience Intro -->
+      <div class="lg:col-span-4 flex flex-col justify-between">
+        <div>
+          <span class="text-xs font-mono text-primary-500 uppercase tracking-wider block mb-1">// Voluntariado</span>
+          <h2 class="text-2xl sm:text-3xl font-medium tracking-tight text-base-100 mb-4" data-i18n="exp.title">
+            Liderazgo & Voluntariado IEEE
+          </h2>
+          <p class="text-sm text-base-300 leading-relaxed mb-6" data-i18n="exp.subtitle">
+            Gestión de equipos, desarrollo comunitario e impulso al conocimiento técnico en la Universidad del Valle.
+          </p>
+        </div>
+      </div>
+
+      <!-- Right Column: Timeline List -->
+      <div class="reveal-stagger lg:col-span-8 flex flex-col gap-6">
+        {
+          experiences.map((item) => (
+            <div class="p-6 bg-base-950 border border-base-800 hover:border-base-700 transition-colors">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+                <h3 class="text-base sm:text-lg font-medium text-base-100" data-i18n={item.roleKey}>
+                  {item.defaultRole}
+                </h3>
+                <span class="text-xs font-mono text-primary-500 px-2 py-0.5 bg-primary-950/40 border border-primary-800/40 self-start sm:self-auto" data-i18n={item.periodKey}>
+                  {item.defaultPeriod}
+                </span>
+              </div>
+
+              <div class="text-xs text-base-400 font-mono mb-3" data-i18n={item.companyKey}>
+                {item.defaultCompany}
+              </div>
+
+              <p class="text-xs sm:text-sm text-base-300 leading-relaxed mb-4" data-i18n={item.descKey}>
+                {item.defaultDesc}
+              </p>
+
+              <div class="flex flex-wrap gap-1.5">
+                {item.skills.map((skill) => (
+                  <span class="text-[11px] font-mono px-2 py-0.5 bg-base-900 border border-base-800 text-base-400">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+    </div>
+  </div>
+</section>

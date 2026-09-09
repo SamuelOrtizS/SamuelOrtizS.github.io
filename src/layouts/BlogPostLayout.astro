@@ -1,0 +1,85 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  tags: string[];
+}
+
+const { title, description, pubDate, tags } = Astro.props;
+
+const formattedDate = pubDate.toLocaleDateString('es-ES', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={`${title} | Samuel Ortiz`} description={description}>
+  <article class="site-container pt-10 md:pt-16 max-w-3xl">
+    
+    <!-- Back to Blog Breadcrumb -->
+    <div class="badge-enter mb-8">
+      <a
+        href="/blog"
+        class="inline-flex items-center gap-1.5 text-xs font-mono text-base-400 hover:text-primary-400 transition-colors underline-ltr py-0.5"
+      >
+        <span>←</span>
+        <span data-i18n="blog.back_all">Volver a todos los artículos</span>
+      </a>
+    </div>
+
+    <!-- Article Header -->
+    <header class="headline-enter pb-8 mb-10 border-b border-base-800">
+      <div class="flex items-center gap-3 text-xs text-base-400 font-mono mb-3">
+        <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+        <span>•</span>
+        <div class="flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <a
+              href={`/blog?tag=${encodeURIComponent(tag)}`}
+              class="text-primary-400 hover:underline no-underline"
+            >
+              #{tag}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <h1 class="text-2xl sm:text-3xl md:text-4xl font-medium tracking-tight text-base-100 leading-tight">
+        {title}
+      </h1>
+
+      <p class="mt-4 text-base text-base-300 leading-relaxed">
+        {description}
+      </p>
+    </header>
+
+    <!-- Markdown Content Container -->
+    <div class="body-enter prose-content">
+      <slot />
+    </div>
+
+    <!-- Article Footer -->
+    <footer class="mt-16 pt-8 border-t border-base-800 flex items-center justify-between">
+      <a
+        href="/blog"
+        class="text-xs font-mono text-base-400 hover:text-primary-400 inline-flex items-center gap-1 underline-ltr"
+      >
+        <span>←</span>
+        <span data-i18n="blog.back_directory">Volver al directorio de artículos</span>
+      </a>
+
+      <a
+        href="#top"
+        class="text-xs font-mono text-base-400 hover:text-primary-400 inline-flex items-center gap-1 underline-ltr"
+      >
+        <span>↑</span>
+        <span data-i18n="blog.back_top">Ir arriba</span>
+      </a>
+    </footer>
+
+  </article>
+</BaseLayout>

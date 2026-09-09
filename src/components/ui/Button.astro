@@ -1,0 +1,57 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'outline' | 'ghost';
+  class?: string;
+  id?: string;
+  download?: boolean | string;
+  target?: string;
+  rel?: string;
+  type?: 'button' | 'submit' | 'reset';
+}
+
+const {
+  href,
+  variant = 'primary',
+  class: className = '',
+  id,
+  download,
+  target,
+  rel,
+  type = 'button',
+  ...rest
+} = Astro.props;
+
+const variantClasses = {
+  primary: 'button--primary',
+  outline: 'button--outline',
+  ghost: 'inline-flex items-center justify-center gap-2 px-3 py-2 text-sm text-[var(--color-base-300)] hover:text-[var(--color-primary-400)] transition-colors',
+};
+
+const classes = `${variantClasses[variant]} ${className}`.trim();
+---
+
+{
+  href ? (
+    <a
+      href={href}
+      class={classes}
+      id={id}
+      download={download}
+      target={target}
+      rel={target === '_blank' ? (rel || 'noopener noreferrer') : rel}
+      {...rest}
+    >
+      <slot />
+    </a>
+  ) : (
+    <button
+      type={type}
+      class={classes}
+      id={id}
+      {...rest}
+    >
+      <slot />
+    </button>
+  )
+}

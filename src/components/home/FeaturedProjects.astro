@@ -1,0 +1,121 @@
+---
+const projects = [
+  {
+    titleKey: 'projects.p1_title',
+    defaultTitle: 'Página Web IEEE ComSoc Univalle',
+    descKey: 'projects.p1_desc',
+    defaultDesc: 'Página web para el capítulo estudiantil de IEEE Communications Society en la Universidad del Valle.',
+    tech: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Astro'],
+    github: 'https://github.com/SamuelOrtizS/comsoc-web/',
+    demo: 'https://comsoc.ieeeunivalle.link/',
+    featured: true,
+  },
+  {
+    titleKey: 'projects.p2_title',
+    defaultTitle: 'Sitio Web Personal',
+    descKey: 'projects.p2_desc',
+    defaultDesc: 'Portafolio web personal para mostrar mis proyectos, habilidades y experiencia.',
+    tech: ['Astro', 'TypeScript', 'Tailwind CSS v4', 'React'],
+    github: 'https://github.com/SamuelOrtizS/personal-site',
+    demo: null,
+    featured: true,
+  },
+];
+---
+
+<section id="projects" class="py-16 border-b border-base-800">
+  <div class="site-container">
+    
+    <!-- Section Header -->
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
+      <div>
+        <span class="text-xs font-mono text-primary-500 uppercase tracking-wider block mb-1">// Proyectos</span>
+        <h2 class="text-2xl sm:text-3xl font-medium tracking-tight text-base-100" data-i18n="projects.title">
+          Proyectos Destacados
+        </h2>
+      </div>
+      <a
+        href="https://github.com/SamuelOrtizS"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-xs text-base-400 hover:text-primary-400 inline-flex items-center gap-1.5 underline-ltr self-start sm:self-auto"
+      >
+        <span data-i18n="projects.view_all">Ver todos los proyectos en GitHub</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+          <polyline points="15 3 21 3 21 9"></polyline>
+          <line x1="10" y1="14" x2="21" y2="3"></line>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="reveal-stagger grid grid-cols-1 md:grid-cols-2 gap-6">
+      {
+        projects.map((project) => (
+          <article class="group relative flex flex-col justify-between p-6 bg-base-950 border border-base-800 hover:border-primary-500/70 transition-all duration-200">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <span class="text-xs font-mono text-base-400 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+                  Open Source
+                </span>
+
+                <div class="flex items-center gap-3">
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-base-400 hover:text-primary-400 transition-colors p-1"
+                      aria-label={`${project.defaultTitle} GitHub repository`}
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                      </svg>
+                    </a>
+                  )}
+
+                  {project.demo && (
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-base-400 hover:text-primary-400 transition-colors p-1"
+                      aria-label={`${project.defaultTitle} live demo`}
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                      </svg>
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              <h3 class="text-lg font-medium text-base-100 group-hover:text-primary-400 transition-colors mb-2.5">
+                <a href={project.github} target="_blank" rel="noopener noreferrer" class="no-underline text-inherit" data-i18n={project.titleKey}>
+                  {project.defaultTitle}
+                </a>
+              </h3>
+
+              <p class="text-xs sm:text-sm text-base-300 leading-relaxed mb-6" data-i18n={project.descKey}>
+                {project.defaultDesc}
+              </p>
+            </div>
+
+            <div class="flex flex-wrap gap-1.5 pt-3 border-t border-base-900">
+              {project.tech.map((t) => (
+                <span class="px-2 py-0.5 text-[11px] font-mono text-base-400 bg-base-900 border border-base-800">
+                  {t}
+                </span>
+              ))}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+  </div>
+</section>

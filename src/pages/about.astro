@@ -1,0 +1,201 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const tools = [
+  {
+    categoryKey: 'about.cat.dev_env',
+    defaultCategory: 'Entorno de Desarrollo',
+    items: [
+      { name: 'VS Code', noteKey: 'about.tool.vscode_note', defaultNote: 'Editor principal de desarrollo y scripts' },
+      { name: 'Git & GitHub', noteKey: 'about.tool.git_note', defaultNote: 'Control de versiones y colaboración open source' },
+      { name: 'MATLAB & Simulink', noteKey: 'about.tool.matlab_note', defaultNote: 'Simulación de sistemas y análisis de redes' },
+    ],
+  },
+  {
+    categoryKey: 'about.cat.embedded',
+    defaultCategory: 'Sistemas Embebidos & Software',
+    items: [
+      { name: 'Microcontroladores & C/C++', noteKey: 'about.tool.mcu_note', defaultNote: 'Programación para sistemas embebidos' },
+      { name: 'Astro & Next.js', noteKey: 'about.tool.web_note', defaultNote: 'Desarrollo de sitios y plataformas web' },
+      { name: 'Tailwind CSS & TypeScript', noteKey: 'about.tool.style_note', defaultNote: 'Estilo e interfaces tipadas' },
+    ],
+  },
+];
+
+const skills = [
+  {
+    categoryKey: 'about.cat.ee',
+    defaultCategory: 'Ingeniería Eléctrica',
+    items: [
+      { nameKey: 'about.skill.telecom', defaultName: 'Telecomunicaciones', levelKey: 'about.lvl.focus', defaultLevel: 'Enfoque' },
+      { nameKey: 'about.skill.embedded', defaultName: 'Sistemas Embebidos', levelKey: 'about.lvl.focus', defaultLevel: 'Enfoque' },
+      { nameKey: 'about.skill.power_grid', defaultName: 'Gestión de Red Eléctrica', levelKey: 'about.lvl.focus', defaultLevel: 'Enfoque' },
+      { nameKey: 'about.skill.circuits', defaultName: 'Análisis de Circuitos', levelKey: 'about.lvl.competent', defaultLevel: 'Competente' },
+    ],
+  },
+  {
+    categoryKey: 'about.cat.software',
+    defaultCategory: 'Desarrollo de Software',
+    items: [
+      { nameKey: 'about.skill.nextjs', defaultName: 'Next.js / React', levelKey: 'about.lvl.competent', defaultLevel: 'Competente' },
+      { nameKey: 'about.skill.astro', defaultName: 'Astro', levelKey: 'about.lvl.competent', defaultLevel: 'Competente' },
+      { nameKey: 'about.skill.ts', defaultName: 'TypeScript', levelKey: 'about.lvl.competent', defaultLevel: 'Competente' },
+      { nameKey: 'about.skill.tailwind', defaultName: 'Tailwind CSS', levelKey: 'about.lvl.competent', defaultLevel: 'Competente' },
+    ],
+  },
+  {
+    categoryKey: 'about.cat.leadership',
+    defaultCategory: 'Liderazgo & Gestión',
+    items: [
+      { nameKey: 'about.skill.team_lead', defaultName: 'Liderazgo de Equipos', levelKey: 'about.lvl.exp', defaultLevel: 'Experiencia' },
+      { nameKey: 'about.skill.event_org', defaultName: 'Organización de Eventos', levelKey: 'about.lvl.exp', defaultLevel: 'Experiencia' },
+      { nameKey: 'about.skill.community', defaultName: 'Gestión de Comunidades', levelKey: 'about.lvl.exp', defaultLevel: 'Experiencia' },
+    ],
+  },
+];
+
+const levelColor: Record<string, string> = {
+  'about.lvl.focus': 'text-primary-400 border-primary-800/60 bg-primary-950/40',
+  'about.lvl.competent': 'text-base-200 border-base-700 bg-base-950',
+  'about.lvl.exp': 'text-primary-300 border-primary-900/60 bg-base-950',
+};
+---
+
+<BaseLayout
+  title="Sobre mí | Samuel Ortiz Sarasti"
+  description="Samuel Ortiz Sarasti — Estudiante de Ingeniería Eléctrica en la Universidad del Valle, voluntario y presidente de IEEE ComSoc Univalle."
+>
+  <div class="site-container pt-12 md:pt-16 pb-20">
+
+    <!-- Page Header -->
+    <header class="reveal pb-8 mb-12 border-b border-base-800">
+      <div class="flex items-center gap-2 text-xs font-mono text-primary-500 mb-2">
+        <span>~/about</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-medium tracking-tight text-base-100 mb-4" data-i18n="about.title">
+        Sobre Mí
+      </h1>
+      <p class="text-base text-base-300 max-w-2xl leading-relaxed" data-i18n="about.subtitle">
+        Samuel Ortiz Sarasti — Estudiante de Ingeniería Eléctrica & Voluntario IEEE.
+      </p>
+    </header>
+
+    <!-- Main Two-Column Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+
+      <!-- Left: Bio Column -->
+      <div class="reveal lg:col-span-5 flex flex-col gap-8">
+
+        <!-- Availability Badge -->
+        <div class="badge-enter inline-flex items-center gap-2 text-xs font-mono text-base-300 px-3 py-1.5 border border-base-800 bg-base-950 self-start">
+          <span class="w-2 h-2 rounded-full bg-primary-500 animate-pulse"></span>
+          <span data-i18n="hero.badge">Disponible para colaboraciones</span>
+        </div>
+
+        <!-- Bio Text -->
+        <div class="flex flex-col gap-5 text-sm text-base-300 leading-loose">
+          <p data-i18n="about.bio_p1">
+            Soy estudiante de Ingeniería Eléctrica en la Universidad del Valle, voluntario de IEEE y actualmente presidente del capítulo estudiantil de IEEE Communications Society en Univalle.
+          </p>
+          <p data-i18n="about.bio_p2">
+            Me apasiona el área de las comunicaciones, los sistemas embebidos y la gestión de la red eléctrica. Me gusta implementar y desarrollar software que resuelva problemas cotidianos.
+          </p>
+          <p data-i18n="about.bio_p3">
+            Mi objetivo es generar un impacto positivo en la comunidad, desarrollar proyectos con propósito social y promover el aprendizaje técnico colaborativo.
+          </p>
+        </div>
+
+        <!-- Contact CTA -->
+        <div class="pt-4 border-t border-base-800">
+          <div class="flex flex-wrap gap-3">
+            <a
+              href="mailto:samuel.ortiz@correounivalle.edu.co"
+              class="button--primary text-xs py-2 px-4 inline-flex items-center gap-2"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              <span>Email</span>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/samuel-ortiz-875b42178/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="button--outline text-xs py-2 px-4 inline-flex items-center gap-2"
+            >
+              <span>LinkedIn</span>
+              <span class="text-primary-500">↗</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right: Skills Column -->
+      <div class="lg:col-span-7 flex flex-col gap-10">
+
+        <!-- Skills by Category -->
+        <div class="w-full">
+          <span class="text-xs font-mono text-primary-500 uppercase tracking-wider block mb-6" data-i18n="about.skills_title">
+            // Áreas de Estudio & Habilidades
+          </span>
+
+          <div class="reveal-stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {skills.map((group) => (
+              <div>
+                <h2 class="text-xs font-mono text-base-400 uppercase tracking-wider mb-3 pb-2 border-b border-base-800 leading-normal" data-i18n={group.categoryKey}>
+                  {group.defaultCategory}
+                </h2>
+                <ul class="flex flex-col gap-3">
+                  {group.items.map((skill) => (
+                    <li class="flex flex-col items-start gap-1 p-2 bg-base-950/60 border border-base-800/80 rounded-none">
+                      <span class="text-xs sm:text-sm text-base-200 font-mono leading-normal" data-i18n={skill.nameKey}>{skill.defaultName}</span>
+                      <span
+                        class={`text-[10px] font-mono px-1.5 py-0.5 border self-start whitespace-nowrap ${levelColor[skill.levelKey] || 'text-base-300 border-base-700 bg-base-950'}`}
+                        data-i18n={skill.levelKey}
+                      >
+                        {skill.defaultLevel}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <hr class="border-base-800" />
+
+        <!-- Tools of the Trade -->
+        <div class="w-full">
+          <span class="text-xs font-mono text-primary-500 uppercase tracking-wider block mb-6" data-i18n="about.tools_title">
+            // Herramientas & Entorno
+          </span>
+
+          <div class="reveal-stagger flex flex-col gap-6">
+            {tools.map((group) => (
+              <div>
+                <h2 class="text-xs font-mono text-base-500 uppercase tracking-wider mb-3 pb-1.5 border-b border-base-900 leading-normal" data-i18n={group.categoryKey}>
+                  {group.defaultCategory}
+                </h2>
+                <ul class="flex flex-col divide-y divide-base-900">
+                  {group.items.map((item) => (
+                    <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 py-2.5">
+                      <span class="text-xs sm:text-sm font-mono font-medium text-base-100 shrink-0">{item.name}</span>
+                      <span class="text-xs text-base-400 font-mono sm:text-right leading-relaxed" data-i18n={item.noteKey}>{item.defaultNote}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</BaseLayout>

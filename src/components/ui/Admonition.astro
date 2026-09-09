@@ -1,0 +1,54 @@
+---
+interface Props {
+  variant?: 'tip' | 'caution' | 'danger' | 'info';
+  title?: string;
+}
+
+const { variant = 'info', title } = Astro.props;
+
+const variants = {
+  tip: {
+    label: title || 'TIP',
+    border: 'border-l-primary-500',
+    bg: 'bg-primary-950/20',
+    headerColor: 'text-primary-400',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7z"></path></svg>`,
+  },
+  caution: {
+    label: title || 'CAUTION',
+    border: 'border-l-amber-500',
+    bg: 'bg-amber-950/20',
+    headerColor: 'text-amber-400',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-amber-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>`,
+  },
+  danger: {
+    label: title || 'DANGER',
+    border: 'border-l-red-500',
+    bg: 'bg-red-950/20',
+    headerColor: 'text-red-400',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-red-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>`,
+  },
+  info: {
+    label: title || 'INFO',
+    border: 'border-l-blue-500',
+    bg: 'bg-blue-950/20',
+    headerColor: 'text-blue-400',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>`,
+  },
+};
+
+const current = variants[variant];
+---
+
+{/* border-l-4: brief-pinned – Quantum Elements spec (docs/documentacion.md §3.1). Not a default; earned by committed visual world. */}
+<aside class={`my-6 border-l-4 p-4 border-base-800 bg-base-950 ${current.border} ${current.bg}`}>
+  <div class="flex items-center gap-2 mb-2">
+    <Fragment set:html={current.icon} />
+    <span class={`text-xs font-mono font-bold uppercase tracking-wider ${current.headerColor}`}>
+      {current.label}
+    </span>
+  </div>
+  <div class="text-sm text-base-300 leading-relaxed pl-7">
+    <slot />
+  </div>
+</aside>

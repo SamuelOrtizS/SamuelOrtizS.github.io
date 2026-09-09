@@ -1,0 +1,94 @@
+---
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => {
+  return import.meta.env.PROD ? !data.draft : true;
+});
+
+allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const posts = allPosts.slice(0, 3);
+---
+
+<section id="blog" class="py-16">
+  <div class="site-container">
+    
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
+      <div>
+        <span class="text-xs font-mono text-primary-500 uppercase tracking-wider block mb-1">// Artículos</span>
+        <h2 class="text-2xl sm:text-3xl font-medium tracking-tight text-base-100" data-i18n="posts.title">
+          Publicaciones Recientes
+        </h2>
+      </div>
+      <a
+        href="/blog"
+        class="text-xs text-base-400 hover:text-primary-400 inline-flex items-center gap-1.5 underline-ltr self-start sm:self-auto"
+      >
+        <span data-i18n="posts.view_all">Ver todo el blog</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+    </div>
+
+    {
+      posts.length === 0 ? (
+        <div class="p-6 bg-base-950 border border-base-800 text-xs font-mono text-base-400">
+          No hay artículos publicados por el momento.
+        </div>
+      ) : (
+        <div class="reveal-stagger flex flex-col divide-y divide-base-800 border-y border-base-800">
+          {posts.map((post) => {
+            const formattedDate = post.data.pubDate.toLocaleDateString('es-ES', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+            });
+
+            return (
+              <article class="group py-6 flex flex-col sm:flex-row sm:items-baseline justify-between gap-4">
+                <div class="max-w-2xl">
+                  <div class="flex items-center gap-3 text-xs text-base-400 font-mono mb-2">
+                    <time datetime={post.data.pubDate.toISOString()}>{formattedDate}</time>
+                    {post.data.draft && (
+                      <span class="px-1.5 py-0.5 text-[10px] bg-amber-950/60 text-amber-400 border border-amber-800/60 uppercase">
+                        DEV DRAFT
+                      </span>
+                    )}
+                    <span>•</span>
+                    <div class="flex items-center gap-2">
+                      {post.data.tags.map((tag) => (
+                        <span class="text-primary-400/90 font-mono">#{tag}</span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <h3 class="text-lg font-medium text-base-100 group-hover:text-primary-400 transition-colors">
+                    <a href={`/blog/${post.id}`} class="no-underline text-inherit underline-ltr">
+                      {post.data.title}
+                    </a>
+                  </h3>
+
+                  <p class="text-xs sm:text-sm text-base-300 leading-relaxed mt-2">
+                    {post.data.description}
+                  </p>
+                </div>
+
+                <div class="sm:self-center shrink-0">
+                  <a
+                    href={`/blog/${post.id}`}
+                    class="inline-flex items-center gap-1 text-xs font-mono text-base-400 group-hover:text-primary-400 transition-colors"
+                  >
+                    <span data-i18n="blog.read_more">Leer artículo</span>
+                    <span class="transition-transform group-hover:translate-x-1">→</span>
+                  </a>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      )
+    }
+
+  </div>
+</section>

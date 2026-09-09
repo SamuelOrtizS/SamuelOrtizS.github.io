@@ -1,0 +1,526 @@
+@import "tailwindcss";
+
+@theme {
+  --font-mono: "JetBrains Mono Variable", monospace;
+  --font-sans: ui-sans-serif, system-ui, sans-serif;
+
+  /* IEEE Electric Blue Accent Palette */
+  --color-primary-400: #00AEEF; /* IEEE Cyan / Electric Blue Bright */
+  --color-primary-500: #00AEEF; /* IEEE Cyan Main Accent */
+  --color-primary-600: #005F98; /* IEEE Deep Blue Secondary Accent */
+  --color-primary-800: oklch(35% 0.12 235);
+  --color-primary-950: oklch(22% 0.08 235);
+
+  /* Quantum Deep Neutral Spectrum */
+  --color-base-50: oklch(98.5% 0 0);
+  --color-base-100: oklch(97% 0 0);
+  --color-base-200: oklch(92.2% 0 0);
+  --color-base-300: oklch(87% 0 0);
+  --color-base-400: oklch(70.8% 0 0);
+  --color-base-500: oklch(55.6% 0 0);
+  --color-base-600: oklch(43.9% 0 0);
+  --color-base-700: oklch(37.1% 0 0);
+  --color-base-800: oklch(26.9% 0 0);
+  --color-base-900: oklch(20.5% 0 0);
+  --color-base-950: oklch(14.5% 0 0);
+
+  /* Status Colors */
+  --color-success: var(--color-primary-500);
+  --color-warning: oklch(87.9% 0.169 91.605);
+  --color-error: oklch(70.4% 0.191 22.216);
+  --color-info: #00AEEF;
+}
+
+:root {
+  --background: var(--color-base-900);
+  --foreground: var(--color-base-200);
+  --border: var(--color-base-700);
+  --primary: var(--color-primary-600);
+  font-family: var(--font-mono);
+  color-scheme: dark;
+}
+
+/* Base page setup */
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-base-950);
+}
+
+body {
+  background-color: var(--color-base-900);
+  color: var(--color-base-200);
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-base-950);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-base-700);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-600);
+}
+
+/* Browser selection */
+::selection {
+  background-color: var(--color-primary-600);
+  color: var(--color-base-950);
+}
+
+/* Site container */
+.site-container {
+  width: 100%;
+  max-width: 68rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .site-container {
+    padding-inline: 2rem;
+  }
+}
+
+/* Quantum Underline Left-to-Right Effect */
+.underline-ltr {
+  background-image: linear-gradient(to right, var(--color-primary-500), var(--color-primary-500));
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 2px;
+  transition: background-size 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.group:hover .underline-ltr,
+.underline-ltr:hover,
+.underline-ltr:focus-visible {
+  background-size: 100% 2px;
+}
+
+/* Quantum Primary Button with Offset Shadow */
+.button--primary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid var(--color-primary-500);
+  background-color: var(--color-base-900);
+  color: var(--color-base-100);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  z-index: 1;
+}
+
+.button--primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--color-primary-600);
+  transform: translate(4px, 4px);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.button--primary:hover {
+  background-color: var(--color-primary-500);
+  color: var(--color-base-950);
+}
+
+.button--primary:hover::after {
+  transform: translate(0, 0);
+}
+
+.button--primary:focus-visible {
+  outline: 2px solid var(--color-primary-400);
+  outline-offset: 4px;
+}
+
+/* Quantum Outline Button */
+.button--outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid var(--color-base-700);
+  background-color: var(--color-base-900);
+  color: var(--color-base-200);
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.button--outline:hover {
+  border-color: var(--color-primary-500);
+  color: var(--color-base-100);
+  background-color: var(--color-base-800);
+}
+
+.button--outline:focus-visible {
+  outline: 2px solid var(--color-primary-400);
+  outline-offset: 2px;
+}
+
+/* Prose / Markdown Content Typography */
+.prose-content {
+  color: var(--color-base-200);
+  line-height: 1.8;
+  font-size: 0.9375rem;
+}
+
+.prose-content > * + * {
+  margin-top: 1.5rem;
+}
+
+.prose-content h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--color-base-100);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.prose-content h3 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--color-base-100);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose-content p {
+  margin-bottom: 1.25rem;
+}
+
+.prose-content a {
+  color: var(--color-primary-400);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.prose-content strong {
+  color: var(--color-base-100);
+  font-weight: 600;
+}
+
+.prose-content ul, .prose-content ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.prose-content ul {
+  list-style-type: disc;
+}
+
+.prose-content ol {
+  list-style-type: decimal;
+}
+
+.prose-content li {
+  margin-bottom: 0.5rem;
+}
+
+.prose-content blockquote {
+  border-left: 4px solid var(--color-primary-500);
+  padding-left: 1rem;
+  font-style: italic;
+  color: var(--color-base-300);
+  margin: 1.5rem 0;
+}
+
+.prose-content pre {
+  padding: 1rem 1.25rem;
+  background-color: var(--color-base-950);
+  border: 1px solid var(--color-base-800);
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  margin: 1.5rem 0;
+}
+
+.prose-content code:not(pre code) {
+  padding: 0.2rem 0.4rem;
+  font-size: 0.8125rem;
+  background-color: var(--color-base-950);
+  border: 1px solid var(--color-base-800);
+  color: var(--color-primary-400);
+  font-family: var(--font-mono);
+}
+
+/* Markdown Tables Styling */
+.prose-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.75rem 0;
+  font-size: 0.875rem;
+  font-family: var(--font-mono);
+  background-color: var(--color-base-950);
+  border: 1px solid var(--color-base-800);
+}
+
+.prose-content th {
+  background-color: var(--color-base-900);
+  color: var(--color-base-100);
+  font-weight: 500;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid var(--color-base-800);
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.prose-content td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--color-base-800);
+  color: var(--color-base-200);
+  vertical-align: top;
+}
+
+.prose-content tr:last-child td {
+  border-bottom: none;
+}
+
+.prose-content tr:hover td {
+  background-color: oklch(22% 0 0);
+}
+
+/* =====================================================
+   MOTION SYSTEM — Quantum Astro
+   Thesis: Terminal-world animations. One authored focal
+   moment (typewriter hero), quiet section reveals,
+   purposeful feedback states.
+   ===================================================== */
+
+/* Section Reveal — fade + subtle upward slide */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered children */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-stagger.visible > *:nth-child(1)  { opacity: 1; transform: translateY(0); transition-delay: 0ms; }
+.reveal-stagger.visible > *:nth-child(2)  { opacity: 1; transform: translateY(0); transition-delay: 60ms; }
+.reveal-stagger.visible > *:nth-child(3)  { opacity: 1; transform: translateY(0); transition-delay: 120ms; }
+.reveal-stagger.visible > *:nth-child(4)  { opacity: 1; transform: translateY(0); transition-delay: 180ms; }
+.reveal-stagger.visible > *:nth-child(5)  { opacity: 1; transform: translateY(0); transition-delay: 240ms; }
+.reveal-stagger.visible > *:nth-child(n+6){ opacity: 1; transform: translateY(0); transition-delay: 280ms; }
+
+/* Typewriter cursor blink (already present in HTML — reinforce) */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* Terminal typing animation */
+@keyframes typing {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+/* Hero status badge entrance */
+@keyframes badge-in {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.badge-enter {
+  animation: badge-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+/* Hero headline entrance */
+@keyframes headline-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.headline-enter {
+  animation: headline-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+}
+
+/* Hero body text entrance */
+.body-enter {
+  animation: headline-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+}
+
+/* Tech badges stagger entrance */
+@keyframes badge-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.badge-pop {
+  animation: badge-pop 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Terminal card slide-in from right */
+@keyframes terminal-enter {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.terminal-enter {
+  animation: terminal-enter 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+/* Typewriter text effect */
+.typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: none;
+  width: 0;
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.typewriter.typed {
+  width: 100%;
+  transition: width 0.8s steps(30, end);
+}
+
+/* Project card hover — border glow */
+article:hover {
+  box-shadow: 0 0 0 1px color-mix(in oklch, var(--color-primary-600) 40%, transparent);
+  transition: box-shadow 0.2s ease;
+}
+
+/* Nav item indicator for active state */
+nav a[aria-current="page"] {
+  position: relative;
+}
+
+nav a[aria-current="page"]::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: var(--color-primary-500);
+}
+
+/* ===================================================
+   prefers-reduced-motion: neutralize spatial movement,
+   preserve feedback colors and state changes.
+   =================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-stagger > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .badge-enter,
+  .headline-enter,
+  .body-enter,
+  .terminal-enter,
+  .badge-pop {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+  .cursor-blink {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* =====================================================
+   VIEW TRANSITIONS — Custom page animation
+   Strategy: gentle fade + 6px vertical shift on the
+   root. Header persists via transition:persist (no
+   flicker). Exit is fast (200ms); entry is confident
+   (300ms). World: terminal-precise, unhurried arrival.
+   ===================================================== */
+
+@keyframes vt-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes vt-fade-out {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-6px); }
+}
+
+::view-transition-old(root) {
+  animation: vt-fade-out 0.18s cubic-bezier(0.4, 0, 1, 1) both;
+}
+
+::view-transition-new(root) {
+  animation: vt-fade-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Persisted header — no animation on the nav island */
+::view-transition-old(site-header),
+::view-transition-new(site-header) {
+  animation: none;
+  mix-blend-mode: normal;
+}

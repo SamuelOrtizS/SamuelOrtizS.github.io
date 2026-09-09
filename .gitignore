@@ -1,0 +1,67 @@
+# ─── Build output ────────────────────────────────────────────────────────────
+dist/
+
+# ─── Astro generated types ───────────────────────────────────────────────────
+.astro/
+
+# ─── Dependencies ────────────────────────────────────────────────────────────
+node_modules/
+
+# ─── Environment variables ───────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ─── Logs ────────────────────────────────────────────────────────────────────
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# ─── OS files ────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── Editor / IDE ────────────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ─── AI tool configs & workspaces ────────────────────────────────────────────
+# Gemini / Antigravity IDE
+.gemini/
+
+# Claude
+.claude/
+CLAUDE.md
+
+# OpenCode
+.opencode/
+
+# GitHub Copilot / Cursor rules (project-level, usually personal)
+.cursorrules
+.github/copilot-instructions.md
+
+# Generic AI context files
+*.ai-context
+*.aiprompt
+
+# ─── Impeccable design tool ───────────────────────────────────────────────────
+# Keep DESIGN.md and PRODUCT.md (useful for the repo), ignore tool state
+.impeccable/
+
+# ─── Agent skill configs ─────────────────────────────────────────────────────
+# Keep .agent/ in repo (skills / rules are project-specific)
+# Uncomment below to ignore it entirely:
+# .agent/
+
+# ─── Misc temp / scratch ─────────────────────────────────────────────────────
+*.tmp
+*.bak
+*.orig
